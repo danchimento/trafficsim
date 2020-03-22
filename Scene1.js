@@ -1,8 +1,8 @@
+import Road from './Road.js';
+
 export default class Scene1 extends Phaser.Scene {
     constructor() {
         super({ key: "scene 1" });
-
-        this.objects = [];
     }
 
     init() {
@@ -18,7 +18,20 @@ export default class Scene1 extends Phaser.Scene {
 
         // For some reason none of the objects appear if this isn't here
         this.add.text(10, 10, "v1.0");
+
         
+        this.road = new Road(this);
+        this.road.laneCount = 2;
+        this.road.draw();
+
+        // path.draw(graphics);
+    }
+
+    update() {
+        
+    }
+
+    _addFollower() {
         var path = this.add.path(100, 100)
             .lineTo(400, 100)
             .lineTo(400, 400)
@@ -32,8 +45,6 @@ export default class Scene1 extends Phaser.Scene {
                 alpha: 1
             }
         });
-
-        path.draw(graphics);
 
         var rect = this.add.rectangle(100, 100, 50, 50, "0xff0000");
 
@@ -52,10 +63,5 @@ export default class Scene1 extends Phaser.Scene {
             repeat: -1,
             yoyo: false
         });
-
-    }
-
-    update() {
-        
     }
 }
